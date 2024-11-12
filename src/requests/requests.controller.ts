@@ -1,9 +1,8 @@
 // src/requests/requests.controller.ts
-import { Controller, Post, Get, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Body, UseGuards, Query } from '@nestjs/common';
 import { RequestsService } from './requests.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Request } from './requests.entity';
-
 
 @Controller('requests')
 export class RequestsController {
@@ -18,5 +17,10 @@ export class RequestsController {
   @Get()
   async findAll() {
     return this.requestsService.findAll();
+  }
+
+  @Get('/fetch')
+  async fetchData(@Query('url') url: string) {
+    return this.requestsService.fetchDataFromUrl(url);
   }
 }

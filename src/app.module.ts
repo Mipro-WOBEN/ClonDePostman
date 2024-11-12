@@ -9,13 +9,17 @@ import { RequestsModule } from './requests/requests.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mssql',
-      host: '--------',
+      host: 'localhost',
       port: 1433,
-      username: '----',
-      password: '-----',
-      database: '-----',
+      username: 'sa',
+      password: '',
+      database: 'postman',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      extra: {
+        encrypt: true, // Habilitar SSL
+        trustServerCertificate: true, // Deshabilitar la verificación del certificado
+      },
     }),
     AuthModule,
     UsersModule,
