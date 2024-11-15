@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { RequestsModule } from './requests/requests.module';
 import { ColeccionesModule } from './colecciones/colecciones.module';
 import { MethodsModule } from './methods/methods.module';
+import { ProyectosModule } from './proyectos/proyectos.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { MethodsModule } from './methods/methods.module';
       password: '',
       database: 'postman',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
       extra: {
         encrypt: true, // Habilitar SSL
         trustServerCertificate: true, // Deshabilitar la verificación del certificado
@@ -28,6 +30,8 @@ import { MethodsModule } from './methods/methods.module';
     RequestsModule,
     ColeccionesModule,
     MethodsModule,
+    ProyectosModule,
+    RolesModule,
   ],
 })
 export class AppModule {}

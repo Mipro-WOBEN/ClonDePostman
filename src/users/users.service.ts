@@ -10,17 +10,28 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(username: string, password: string): Promise<User> {
-    const newUser = this.usersRepository.create({ username, password });
+  async create(
+    nombre: string,
+    apellido: string,
+    correo: string,
+    contraseña: string,
+  ): Promise<User> {
+    const newUser = this.usersRepository.create({
+      nombre,
+      apellido,
+      correo,
+      contraseña,
+    });
     return await this.usersRepository.save(newUser);
   }
 
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
   }
-
+  /*
   // Método para buscar un usuario por nombre de usuario
   async findByUsername(username: string): Promise<User | undefined> {
     return await this.usersRepository.findOne({ where: { username } });
   }
+    */
 }

@@ -6,7 +6,7 @@ import { UnauthorizedException } from '@nestjs/common';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-
+  /*
   @Post('login')
   async login(@Body('username') username: string, @Body('password') password: string) {
     const user = await this.authService.validateUser(username, password);
@@ -15,4 +15,5 @@ export class AuthController {
     }
     return this.authService.login(user);
   }
+    */
 }

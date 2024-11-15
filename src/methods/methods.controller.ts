@@ -7,8 +7,8 @@ export class MethodsController {
   constructor(private readonly methodService: MethodsService) {}
 
   @Get()
-  async methodsAll(): Promise<Methods[]> {
-    const usuarios = await this.methodService.methodsAll();
-    return usuarios;
+  async getMethodsAll(): Promise<Methods[]> {
+    const methods = await this.methodService.methodsAll();
+    return methods;
   }
 }

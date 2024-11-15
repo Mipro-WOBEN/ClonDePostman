@@ -1,32 +1,39 @@
 // src/requests/requests.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Colecciones } from 'src/colecciones/colecciones.entity';
+import { Methods } from 'src/methods/methods.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity('solicitudes')
 export class Request {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 25, nullable: false })
   nombre: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 200, nullable: false })
   url: string;
-
-  @Column()
-  method: string;
-
-  @Column({ type: 'text', nullable: true })
-  body: string;
 
   @Column({ type: 'text', nullable: true })
   header: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
+  body: string;
+
+  @Column({ type: 'date', nullable: true })
   creado_en: Date;
 
-  @Column()
-  id_coleccion: number;
+  @ManyToOne(() => Colecciones, (coleccion) => coleccion.requests)
+  @JoinColumn({ name: 'id_method' })
+  coleccion: Colecciones;
 
-  @Column()
-  id_method: number;
+  @ManyToOne(() => Methods, (method) => method.requests)
+  @JoinColumn({ name: 'id_method' })
+  method: Methods;
 }
