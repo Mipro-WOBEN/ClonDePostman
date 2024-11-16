@@ -29,8 +29,14 @@ export class Request {
   @Column({ type: 'date', nullable: true })
   creado_en: Date;
 
+  @Column()
+  id_coleccion: number;
+
+  @Column()
+  id_method: number;
+
   @ManyToOne(() => Colecciones, (coleccion) => coleccion.requests)
-  @JoinColumn({ name: 'id_method' })
+  @JoinColumn({ name: 'id_coleccion' })
   coleccion: Colecciones;
 
   @ManyToOne(() => Methods, (method) => method.requests)

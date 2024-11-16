@@ -17,6 +17,9 @@ export class Colecciones {
   @Column({ type: 'varchar', length: 50, nullable: false })
   nombre_coleccion: string;
 
+  @Column()
+  id_proyecto: number;
+
   @ManyToOne(() => Proyectos)
   @JoinColumn({ name: 'id_proyecto' })
   proyecto: Proyectos;

@@ -22,9 +22,11 @@ export class Proyectos {
   @Column({ type: 'text', nullable: true })
   descripcion: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'date', nullable: true, default: () => 'GETDATE()' })
   creado_en: Date;
 
+  @Column({ type: 'int', nullable: false })
+  id_usuario: number;
   @ManyToOne(() => User, (user) => user.proyectos)
   @JoinColumn({ name: 'id_usuario' })
   user: User;

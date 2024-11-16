@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from './users.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDTO } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -10,23 +11,17 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(
-    nombre: string,
-    apellido: string,
-    correo: string,
-    contraseña: string,
-  ): Promise<User> {
-    const newUser = this.usersRepository.create({
-      nombre,
-      apellido,
-      correo,
-      contraseña,
-    });
+  async createUser(user: CreateUserDTO): Promise<User> {
+    const newUser = this.usersRepository.create(user);
     return await this.usersRepository.save(newUser);
   }
 
-  async findAll(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     return await this.usersRepository.find();
+  }
+
+  async getUser(id: number): Promise<User> {
+    return await this.usersRepository.findOne({ where: { id: id } });
   }
   /*
   // Método para buscar un usuario por nombre de usuario
