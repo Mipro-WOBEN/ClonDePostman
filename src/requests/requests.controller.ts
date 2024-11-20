@@ -1,22 +1,39 @@
 // src/requests/requests.controller.ts
-import { Controller, Post, Get, Body, UseGuards, Query } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  UseGuards,
+  Query,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RequestsService } from './requests.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Request } from './requests.entity';
+import { CreateRequestsDTO } from './dto/create-requests.dto';
 
 @Controller('requests')
 export class RequestsController {
   constructor(private readonly requestsService: RequestsService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
-  async createRequest(@Body() requestData: Partial<Request>) {
-    return this.requestsService.create(requestData);
+  async createRequest(@Body() requestData: CreateRequestsDTO) {
+    return this.requestsService.createRequest(requestData);
   }
 
   @Get()
-  async findAll() {
-    return this.requestsService.findAll();
+  async getRequests() {
+    return this.requestsService.getRequests();
+  }
+
+  @Delete(':id')
+  async deleteRequest(@Param('id') id: number) {
+    return this.requestsService.deleteRequest(id);
+  }
+
+  @Get(':id')
+  async getRequest(@Param('id') id: number) {
+    return this.requestsService.getRequest(id);
   }
 
   @Get('/fetch')

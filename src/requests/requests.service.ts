@@ -1,27 +1,35 @@
 // src/requests/requests.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Request } from './requests.entity';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import { lastValueFrom } from 'rxjs';
+import { CreateRequestsDTO } from './dto/create-requests.dto';
 
 @Injectable()
 export class RequestsService {
   constructor(
     @InjectRepository(Request)
-    private requestsRepository: Repository<Request>,
+    private readonly requestsRepository: Repository<Request>,
     private readonly httpService: HttpService,
   ) {}
 
-  async create(requestData: Partial<Request>): Promise<Request> {
-    const request = this.requestsRepository.create(requestData);
-    return this.requestsRepository.save(request);
+  async createRequest(request: CreateRequestsDTO) {
+    const newRequest = this.requestsRepository.create(request);
   }
 
-  async findAll(): Promise<Request[]> {
+  async getRequests(): Promise<Request[]> {
     return this.requestsRepository.find();
+  }
+
+  async getRequest(id: number): Promise<Request> {
+    return await this.requestsRepository.findOne({ where: { id: id } });
+  }
+
+  async deleteRequest(id: number): Promise<DeleteResult> {
+    return this.requestsRepository.delete({ id: id });
   }
 
   async fetchDataFromUrl(url: string): Promise<any> {
