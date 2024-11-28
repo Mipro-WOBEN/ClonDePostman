@@ -32,7 +32,7 @@ export class RequestsService {
     return this.requestsRepository.delete({ id: id });
   }
 
-  async fetchDataFromUrl(url: string): Promise<any> {
+  async getUrl(url: string): Promise<any> {
     try {
       const response = await lastValueFrom(this.httpService.get(url));
       return response.data;
@@ -41,7 +41,7 @@ export class RequestsService {
     }
   }
 
-  async postDataToUrl(url: string, data: any): Promise<any> {
+  async postUrl(url: string, data: any): Promise<any> {
     try {
       const response = await lastValueFrom(this.httpService.post(url, data));
       return response.data; // Devuelve los datos de la respuesta

@@ -15,12 +15,6 @@ import { CreateRequestsDTO } from './dto/create-requests.dto';
 @Controller('requests')
 export class RequestsController {
   constructor(private readonly requestsService: RequestsService) {}
-
-  @Post()
-  async createRequest(@Body() requestData: CreateRequestsDTO) {
-    return this.requestsService.createRequest(requestData);
-  }
-
   @Get()
   async getRequests() {
     return this.requestsService.getRequests();
@@ -36,8 +30,18 @@ export class RequestsController {
     return this.requestsService.getRequest(id);
   }
 
-  @Get('/fetch')
-  async fetchData(@Query('url') url: string) {
-    return this.requestsService.fetchDataFromUrl(url);
+  @Get('data/get')
+  async getData(@Query('url') url: string) {
+    return this.requestsService.getUrl(url);
+  }
+
+  @Post('data/post')
+  async postData(@Query('url') url: string, @Body() data: any) {
+    return this.requestsService.postUrl(url, data);
+  }
+
+  @Post()
+  async createRequest(@Body() requestData: CreateRequestsDTO) {
+    return this.requestsService.createRequest(requestData);
   }
 }
