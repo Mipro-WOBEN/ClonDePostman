@@ -28,4 +28,7 @@ export class User {
 
   @OneToMany(() => Proyectos, (proyecto) => proyecto.user)
   proyectos: Proyectos[];
+
+  @Column({ default: true, nullable: true })
+  isActive: boolean;
 }

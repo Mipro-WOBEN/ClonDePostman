@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   async getUsers(): Promise<User[]> {
-    return await this.usersRepository.find();
+    return await this.usersRepository.find({ where: { isActive: true } });
   }
 
   async getUser(id: number): Promise<User> {

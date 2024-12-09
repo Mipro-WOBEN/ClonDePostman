@@ -6,7 +6,7 @@ export class Roles {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   nombre_rol: string;
 
   @OneToMany(

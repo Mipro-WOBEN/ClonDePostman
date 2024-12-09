@@ -19,7 +19,8 @@ import { RolesModule } from './roles/roles.module';
       password: '',
       database: 'postman',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+      synchronize: true,
+      autoLoadEntities: true,
       extra: {
         encrypt: true, // Habilitar SSL
         trustServerCertificate: true, // Deshabilitar la verificación del certificado

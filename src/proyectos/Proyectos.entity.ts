@@ -39,4 +39,7 @@ export class Proyectos {
     (usuarioRolProyecto) => usuarioRolProyecto.user,
   )
   usuarioRolProyectos: UsuarioRolProyecto[];
+
+  // @Column({ default: true, nullable: true })
+  // isActive: boolean;
 }
